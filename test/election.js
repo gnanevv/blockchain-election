@@ -1,6 +1,8 @@
 const Election = artifacts.require("../contracts/Election.sol");
 
 contract("Election", function(accounts) {
+    const electionInstance;
+
     it("initialises with two candidates", function() {
         return Election.deployed().then(function(instance) {
             return instance.candidatesCount();
