@@ -1,22 +1,25 @@
-pragma solidity ^0.5.16;
+pragma solidity >=0.4.20;
 
-contract Election {
-    // model a candidate
+contract ElectionContract {
+    // Model a Candidate
     struct Candidate {
         uint256 id;
         string name;
         uint256 voteCount;
     }
-    mapping(uint256 => Candidate) public candidates;
 
+    // Store accounts that have voted
+    mapping(address => bool) public voters;
+    // Store Candidates
+    // Fetch Candidate
+    mapping(uint256 => Candidate) public candidates;
+    // Store Candidates Count
     uint256 public candidatesCount;
 
-    // read condidate
-    function StartElection() public {
-        // candidate = "Candidate 1";
-    }
+    // voted event
+    event votedEvent(uint256 indexed _candidateId);
 
-    function ElectionFunc() public {
+    function Election() public {
         addCandidate("Candidate 1");
         addCandidate("Candidate 2");
     }
@@ -40,6 +43,6 @@ contract Election {
         candidates[_candidateId].voteCount++;
 
         // trigger voted event
-        votedEvent(_candidateId);
+        emit votedEvent(_candidateId);
     }
 }
